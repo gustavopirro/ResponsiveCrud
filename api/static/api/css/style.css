@@ -1,4 +1,11 @@
 .bi{
     color:black;
-    width: 20rem;
+}
+
+.post-title {
+    color: black;
+}
+
+.post-info {
+    font-size: 11px;
 }

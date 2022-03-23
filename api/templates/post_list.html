@@ -2,19 +2,19 @@
 {% load humanize %}
     {% block content %}
         {% for post in post_list %}
-            <h1 class="d-inline-block mr-auto">  
-                <a href="{% url 'api:post_detail' post.id %}">{{post.title}}</a>
-            </h1>
+            <h2 class="d-inline-block ">  
+                <a class="text-decoration-none post-title" href="{% url 'api:post_detail' post.id %}">{{post.title}}</a>
+            </h2>
             {% if post.author == request.user %}
             <span><a href="{% url 'api:post_edit' post.id %}"><i class="bi bi-pencil-square"></i></span></a>
             <span><a href="{% url 'api:post_delete' post.id %}"><i class="bi bi-x-square"></i></span></a>
             {% endif %}
-            <p>{{post.content}}</p>
-            <p>{{post.creation_date | naturaltime }}</p>
-            <p>{{post.author}}</p>
+            <p class="post-info">Created by: {{post.author}}</p>
+            <a class="text-decoration-none post-title" href="{% url 'api:post_detail' post.id %}"><p class="post-info">{{post.creation_date | naturaltime }} - {{ post.creation_date }}</p></a>
             {% if post.updated %}
-            <p>Updated at:{{post.updated_at}}</p>
+            <a class="text-decoration-none post-title" href="{% url 'api:post_detail' post.id %}"><p class="post-info">Updated at: {{post.updated_at}}</p></a>
             {% endif %}
             <hr>
+            <p>{{post.content}}</p>
         {% endfor %}
     {% endblock %}
