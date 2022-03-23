@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
     {% block content %}
         {% for post in post_list %}
             <h1 class="d-inline-block mr-auto">  
@@ -9,7 +10,7 @@
             <span><a href="{% url 'api:post_delete' post.id %}"><i class="bi bi-x-square"></i></span></a>
             {% endif %}
             <p>{{post.content}}</p>
-            <p>{{post.creation_date}}</p>
+            <p>{{post.creation_date | naturaltime }}</p>
             <p>{{post.author}}</p>
             {% if post.updated %}
             <p>Updated at:{{post.updated_at}}</p>
