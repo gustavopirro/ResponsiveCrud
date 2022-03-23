@@ -5,6 +5,6 @@ from api.views import ListPostsView
 app_name = 'api'
 
 urlpatterns = [
-    path('', CreatePostView.as_view(), name='create_post'),
-    path('posts/', ListPostsView.as_view(), name='list_posts')
+    path('', CreatePostView.as_view(), name='post_create'),
+    path('posts/', ListPostsView.as_view(), name='post_list'),
 ]
