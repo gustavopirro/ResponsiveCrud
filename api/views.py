@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.views.generic import ListView
+from django.views.generic import DetailView
 from api.forms import PostForm
 from api.models import Post
 
@@ -8,7 +9,7 @@ from api.models import Post
 class CreatePostView(FormView):
     template_name = 'create_post.html'
     form_class = PostForm
-    success_url = reverse_lazy('api:list_posts')
+    success_url = reverse_lazy('api:post_list')
 
     def form_valid(self, form):
         Post.objects.create(
@@ -22,3 +23,8 @@ class CreatePostView(FormView):
 class ListPostsView(ListView):
     queryset = Post.objects.all().order_by('-creation_date')
     template_name = 'post_list.html'
+
+
+class DetailPostView(DetailView):
+    model = Post
+    template_name = 'post_detail.html'
