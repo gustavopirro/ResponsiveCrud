@@ -1,8 +1,10 @@
-from django.contrib import admin
 from django.urls import path
-from django.urls import include
-from api.views import HomePageView
+from api.views import CreatePostView
+from api.views import ListPostsView
+
+app_name = 'api'
 
 urlpatterns = [
-    path('', HomePageView.as_view(), name='homepage'),
+    path('', CreatePostView.as_view(), name='create_post'),
+    path('posts/', ListPostsView.as_view(), name='list_posts')
 ]
