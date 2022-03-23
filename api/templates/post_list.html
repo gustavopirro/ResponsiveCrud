@@ -2,14 +2,14 @@
 {% load humanize %}
     {% block content %}
         {% for post in post_list %}
-            <h2 class="d-inline-block ">  
+            <h2 class="d-inline-block">  
                 <a class="text-decoration-none post-title" href="{% url 'api:post_detail' post.id %}">{{post.title}}</a>
             </h2>
             {% if post.author == request.user %}
             <span><a href="{% url 'api:post_edit' post.id %}"><i class="bi bi-pencil-square"></i></span></a>
             <span><a href="{% url 'api:post_delete' post.id %}"><i class="bi bi-x-square"></i></span></a>
             {% endif %}
-            <p class="post-info">Created by: {{post.author}}</p>
+            <p class="post-info">Created by: <a class="text-decoration-none post-info" href="{% url 'api:post_list_author' post.author %}">{{post.author}}</a></p>
             <a class="text-decoration-none post-title" href="{% url 'api:post_detail' post.id %}"><p class="post-info">{{post.creation_date | naturaltime }} - {{ post.creation_date }}</p></a>
             {% if post.updated %}
             <a class="text-decoration-none post-title" href="{% url 'api:post_detail' post.id %}"><p class="post-info">Updated at: {{post.updated_at}}</p></a>

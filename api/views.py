@@ -8,6 +8,14 @@ from api.forms import PostForm
 from api.models import Post
 
 
+class ListPostsByAuthorView(ListView):
+    template_name = 'post_list.html'
+
+    def get_queryset(self):
+        queryset = Post.objects.filter(author__username=self.kwargs.get('author'))
+        return queryset
+
+
 class CreatePostView(FormView):
     template_name = 'create_post.html'
     form_class = PostForm
@@ -66,7 +74,6 @@ class SignUpView(FormView):
 
     def form_valid(self, form):
         form.save()
-        print(form.cleaned_data)
         username = form.cleaned_data.get('username')
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
