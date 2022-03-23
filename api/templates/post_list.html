@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
     {% block content %}
         {% for post in post_list %}
-            <a href="{% url 'api:post_detail' post.id %}"><h1>{{post.title}}</h1></a>
+            <h1><a href="{% url 'api:post_detail' post.id %}">{{post.title}}</a></h1>
+            <p><a href="{% url 'api:post_delete' post.id %}">Delete</a></p>
             <p>{{post.content}}</p>
             <p>{{post.creation_date}}</p>
             <p>{{post.author}}</p>
