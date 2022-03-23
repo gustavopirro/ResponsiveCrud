@@ -3,11 +3,16 @@
         {% for post in post_list %}
             <h1>
                 <a href="{% url 'api:post_detail' post.id %}">{{post.title}}</a>
-                <span><a href="{% url 'api:post_edit' post.id %}">Edit</a></span>
-                <span><a href="{% url 'api:post_delete' post.id %}">Delete</a></span>
+                {% if post.author == request.user %}
+                    <span><a href="{% url 'api:post_edit' post.id %}">Edit</a></span>
+                    <span><a href="{% url 'api:post_delete' post.id %}">Delete</a></span>
+                {% endif %}
             </h1>
             <p>{{post.content}}</p>
             <p>{{post.creation_date}}</p>
             <p>{{post.author}}</p>
+            {% if post.updated %}
+            <p>Updated at:{{post.updated_at}}</p>
+            {% endif %}
         {% endfor %}
     {% endblock %}

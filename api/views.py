@@ -1,3 +1,4 @@
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.views.generic import FormView
@@ -42,6 +43,20 @@ class UpdatePostView(UpdateView):
     template_name = 'post_update.html'
     fields = ['title', 'content']
     success_url = '/'
+
+    def form_valid(self, form):
+        post_id = self.kwargs.get('pk')
+        post = Post.objects.get(pk=post_id)
+
+        if post.author == self.request.user:
+            post.title = form.cleaned_data['title']
+            post.content = form.cleaned_data['content']
+            post.updated = True
+            post.save()
+        else:
+            return HttpResponseForbidden()
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class SignUpView(FormView):

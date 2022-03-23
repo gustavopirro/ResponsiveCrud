@@ -7,6 +7,7 @@ class Post(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     content = models.TextField(max_length=2000)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    updated = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
