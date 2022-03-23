@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load humanize %}
+    {% block content %}
+        {% for author in authors_list %}
+            <h2>{{author.author}}</h2>
+            {% if author.last_post %}
+            <h5>Last Post:</h5>
+            <p><a href="{% url 'api:post_detail' author.last_post.id %}">{{ author.last_post.title }}</a></p>
+            {% else %}
+            <p>This author has no posts</p>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}

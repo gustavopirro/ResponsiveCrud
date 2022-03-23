@@ -6,6 +6,22 @@ from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
 from api.forms import PostForm
 from api.models import Post
+from django.contrib.auth.models import User
+
+
+class AuthorListView(ListView):
+    template_name = 'author_list.html'
+    context_object_name = 'authors_list'
+
+    def get_queryset(self):
+        authors = User.objects.all()
+        authors_list = []
+        for author in authors:
+            authors_list.append({
+                'author': author,
+                'last_post': Post.objects.filter(author=author).last()
+            })
+        return authors_list
 
 
 class ListPostsByAuthorView(ListView):
