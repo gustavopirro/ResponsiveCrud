@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
     {% block content %}
-        <h1>{{post.title}}</h1>
+        <h1 class="d-inline-block mr-auto">{{post.title}}</h1>
+        {% if post.author == request.user %}
+        <span><a href="{% url 'api:post_edit' post.id %}"><i class="bi bi-pencil-square"></i></span></a>
+        <span><a href="{% url 'api:post_delete' post.id %}"><i class="bi bi-x-square"></i></span></a>
+        {% endif %}
         <p>{{post.content}}</p>
         <p>{{post.creation_date}}</p>
         <p>{{post.author}}</p>

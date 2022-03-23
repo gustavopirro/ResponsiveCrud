@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
     {% block content %}
         {% for post in post_list %}
-            <h1>
+            <h1 class="d-inline-block mr-auto">  
                 <a href="{% url 'api:post_detail' post.id %}">{{post.title}}</a>
-                {% if post.author == request.user %}
-                    <span><a href="{% url 'api:post_edit' post.id %}">Edit</a></span>
-                    <span><a href="{% url 'api:post_delete' post.id %}">Delete</a></span>
-                {% endif %}
             </h1>
+            {% if post.author == request.user %}
+            <span><a href="{% url 'api:post_edit' post.id %}"><i class="bi bi-pencil-square"></i></span></a>
+            <span><a href="{% url 'api:post_delete' post.id %}"><i class="bi bi-x-square"></i></span></a>
+            {% endif %}
             <p>{{post.content}}</p>
             <p>{{post.creation_date}}</p>
             <p>{{post.author}}</p>
             {% if post.updated %}
             <p>Updated at:{{post.updated_at}}</p>
             {% endif %}
+            <hr>
         {% endfor %}
     {% endblock %}
