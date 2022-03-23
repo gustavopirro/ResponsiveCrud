@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.views.generic import FormView
-from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
 from api.forms import PostForm
 from api.models import Post
@@ -17,7 +17,7 @@ class CreatePostView(FormView):
             title=form.cleaned_data['title'].capitalize(),
             content=form.cleaned_data['content'].capitalize(),
             author=self.request.user
-            )
+        )
         return super().form_valid(form)
 
 
@@ -35,6 +35,13 @@ class DeletePostView(DeleteView):
     model = Post
     success_url = '/'
     template_name = 'post_confirm_delete.html'
+
+
+class UpdatePostView(UpdateView):
+    model = Post
+    template_name = 'post_update.html'
+    fields = ['title', 'content']
+    success_url = '/'
 
 
 class SignUpView(FormView):
