@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.views.generic import FormView
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from api.forms import PostForm
 from api.models import Post
 from django.contrib.auth.models import User
@@ -32,7 +33,7 @@ class ListPostsByAuthorView(ListView):
         return queryset
 
 
-class CreatePostView(FormView):
+class CreatePostView(LoginRequiredMixin, FormView):
     template_name = 'create_post.html'
     form_class = PostForm
     success_url = reverse_lazy('api:post_list')
@@ -56,13 +57,20 @@ class DetailPostView(DetailView):
     template_name = 'post_detail.html'
 
 
-class DeletePostView(DeleteView):
+class DeletePostView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/'
     template_name = 'post_confirm_delete.html'
 
+    def dispatch(self, request, *args, **kwargs):
 
-class UpdatePostView(UpdateView):
+        if request.user != self.get_object().author:
+            return self.handle_no_permission()
+
+        return super().dispatch(request, *args, **kwargs)
+
+
+class UpdatePostView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'post_update.html'
     fields = ['title', 'content']
@@ -81,6 +89,13 @@ class UpdatePostView(UpdateView):
             return HttpResponseForbidden()
 
         return HttpResponseRedirect(self.get_success_url())
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if request.user != self.get_object().author:
+            return self.handle_no_permission()
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class SignUpView(FormView):
