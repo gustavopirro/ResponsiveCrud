@@ -4,6 +4,7 @@
 #### Features
 ✅Login System<br>
 ✅Responsive Template<br>
+✅Docker build<br>
 ✅Bootstrap4 Template Integration<br>
 ✅Anti-CSRF Security<br>
 ✅PostgreSQL Integration<br>
