@@ -18,5 +18,5 @@ urlpatterns = [
     path('posts/<str:author>/', ListPostsByAuthorView.as_view(), name='post_list_author'),
     path('authors/', AuthorListView.as_view(), name='author_list'),
     path('api/posts/', PostListAPIView.as_view(), name='api_post_list'),
-    path('api/posts/<int:pk>/', PostRetrieveAPIView.as_view(), name='api_post_retrieve'),
+    path('api/posts/<int:pk>/', PostRetrieveAPIView.as_view(), name='api_post_detail'),
 ]
