@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
 {% load humanize %}
-    {% block content %}
-        {% for author in authors_list %}
-            <h2><a class="text-decoration-none post-title" href="{% url 'api:post_list_author' author.author %}">{{author.author}}</a></h2>
-            {% if author.last_post %}
-            <h5>Last Post:</h5>
-            <p><a class="text-decoration-none post-title" href="{% url 'api:post_detail' author.last_post.id %}">{{ author.last_post.title }}</a></p>
-            {% else %}
-            <p>This author has no posts</p>
+{% block content %}
+{% for author in authors_list %}    
+    <h2><a class="text-decoration-none post-title"
+            href="{% url 'api:post_list_author' author.author %}">{{author.author}}</a></h2>
+    {% if author.last_post %}
+    <h5>Last Post:</h5>
+    <p><a class="text-decoration-none post-title" href="{% url 'api:post_detail' author.last_post.id %}">
+        {{ author.last_post.title }}</a></p>
+    {% else %}
+    <p>This author has no posts</p>
+    {% endif %}
+    {{ author.full_name|upper }}<br>
+    ...
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
             {% endif %}
-        {% endfor %}
-    {% endblock %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endfor %}
+{% endblock %}

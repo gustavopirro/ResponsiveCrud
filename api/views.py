@@ -25,6 +25,7 @@ class PostRetrieveAPIView(generics.RetrieveAPIView):
 class AuthorListView(ListView):
     template_name = 'author_list.html'
     context_object_name = 'authors_list'
+    paginate_by = 10
 
     def get_queryset(self):
         authors = User.objects.all()
@@ -62,6 +63,7 @@ class CreatePostView(LoginRequiredMixin, FormView):
 class ListPostsView(ListView):
     queryset = Post.objects.all().order_by('-creation_date')
     template_name = 'post_list.html'
+    paginate_by = 5
 
 
 class DetailPostView(DetailView):
