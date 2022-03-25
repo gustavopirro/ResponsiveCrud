@@ -25,7 +25,7 @@ class PostRetrieveAPIView(generics.RetrieveAPIView):
 class AuthorListView(ListView):
     template_name = 'author_list.html'
     context_object_name = 'authors_list'
-    paginate_by = 10
+    paginate_by = 3
 
     def get_queryset(self):
         authors = User.objects.all()

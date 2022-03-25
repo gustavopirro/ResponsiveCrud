@@ -11,8 +11,7 @@
     {% else %}
     <p>This author has no posts</p>
     {% endif %}
-    {{ author.full_name|upper }}<br>
-    ...
+{% endfor %}
 
     <div class="pagination">
         <span class="step-links">
@@ -31,5 +30,4 @@
             {% endif %}
         </span>
     </div>
-{% endfor %}
 {% endblock %}
