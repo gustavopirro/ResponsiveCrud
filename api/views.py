@@ -8,6 +8,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from api.forms import PostForm
 from api.models import Post
 from django.contrib.auth.models import User
+from rest_framework import generics
+from api.serializers import PostSerializer
+
+
+class PostListAPIView(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class PostRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 class AuthorListView(ListView):
