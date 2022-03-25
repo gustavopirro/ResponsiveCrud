@@ -6,6 +6,7 @@
 ✅Responsive Template<br>
 ✅Docker build<br>
 ✅API REST Integrated<br>
+✅API Unit Test<br>
 ✅Bootstrap4 Template Integration<br>
 ✅Anti-CSRF Security<br>
 ✅PostgreSQL Integration<br>
