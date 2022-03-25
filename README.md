@@ -5,6 +5,7 @@
 ✅Login System<br>
 ✅Responsive Template<br>
 ✅Docker build<br>
+✅API REST Integrated<br>
 ✅Bootstrap4 Template Integration<br>
 ✅Anti-CSRF Security<br>
 ✅PostgreSQL Integration<br>
@@ -30,6 +31,13 @@ http://127.0.0.1:8000/posts/create/ - Form Based Post Creation
 http://127.0.0.1:8000/posts/delete/ - Post Deletion with deletion confirm form
 http://127.0.0.1:8000/posts/update/ - Form Based Post Update
 ```
+
+## API Endpoints
+```
+http://127.0.0.1:8000/api/posts/ - Post API List - Accepts Get and POST Methods(If logged)
+http://127.0.0.1:8000/api/posts/<int:id>/ - Retrieve single Post list
+```
+
 ## Port
 ```
 Default port is 8000, but can be changed on server run (Description below).
